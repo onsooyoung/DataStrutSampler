@@ -1,14 +1,16 @@
 package set.hashset;
 
-import jdk.nashorn.internal.objects.annotations.Setter;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Spliterator;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HashSetTest {
 
@@ -16,7 +18,7 @@ public class HashSetTest {
 
     Set<String> stringSetSecond = new HashSet();
 
-    @Before
+    @BeforeAll
     public void setupData(){
         stringSet.add("element1");
         stringSet.add("element2");
@@ -26,23 +28,23 @@ public class HashSetTest {
 
     @Test
     public void checkExist(){
-        Assert.assertTrue(stringSet.contains("element1"));
+        assertTrue(stringSet.contains("element1"));
     }
 
     @Test
     public void checkNoneExist(){
-        Assert.assertFalse(stringSet.contains("element0"));
+        assertFalse(stringSet.contains("element0"));
     }
 
     @Test
     public void checkSize(){
-        Assert.assertTrue(stringSet.size() == 4);
+        assertTrue(stringSet.size() == 4);
     }
 
     @Test
     public void checkClear(){
         stringSet.clear();
-        Assert.assertTrue(stringSet.isEmpty());
+        assertTrue(stringSet.isEmpty());
     }
 
     @Test
@@ -50,7 +52,7 @@ public class HashSetTest {
         setupData();
         stringSet.add("element4");//duplicate
         stringSet.add("element5");
-        Assert.assertTrue(stringSet.size() == 5);
+        assertTrue(stringSet.size() == 5);
     }
 
     @Test
@@ -60,14 +62,14 @@ public class HashSetTest {
         stringSetSecond.add("element7");
         stringSetSecond.add("element8");
         stringSet.addAll(stringSetSecond);
-        Assert.assertTrue(stringSet.size() == 8);
+        assertTrue(stringSet.size() == 8);
     }
 
     @Test
     public void checkContainAll(){
 
         stringSetSecond.add("element8");
-        Assert.assertFalse(stringSet.containsAll(stringSetSecond));
+        assertFalse(stringSet.containsAll(stringSetSecond));
     }
 
     @Test
@@ -84,8 +86,8 @@ public class HashSetTest {
         tempSet.add("element7");
         tempSet.add("element8");
 
-        Assert.assertTrue(stringSetSecond.hashCode() == tempSet.hashCode());//value same is hashCode same
-        Assert.assertTrue(stringSetSecond.equals(tempSet));
+        assertTrue(stringSetSecond.hashCode() == tempSet.hashCode());//value same is hashCode same
+        assertTrue(stringSetSecond.equals(tempSet));
     }
 
     @Test
@@ -103,17 +105,17 @@ public class HashSetTest {
         tempSet.add("element8");
         tempSet.add("element9");
 
-        Assert.assertFalse(stringSetSecond.hashCode() == tempSet.hashCode());
-        Assert.assertFalse(stringSetSecond.equals(tempSet));
+        assertFalse(stringSetSecond.hashCode() == tempSet.hashCode());
+        assertFalse(stringSetSecond.equals(tempSet));
 
     }
 
     @Test
     public void checkRemove(){
 
-        Assert.assertTrue(stringSet.contains("element1"));
+        assertTrue(stringSet.contains("element1"));
         stringSet.remove("element1");
-        Assert.assertFalse(stringSet.contains("element1"));
+        assertFalse(stringSet.contains("element1"));
     }
 
     @Test
@@ -125,9 +127,9 @@ public class HashSetTest {
         stringSetSecond.add("element8");
         stringSet.addAll(stringSetSecond);
 
-        Assert.assertTrue(stringSet.size() == 8);
-        Assert.assertTrue(stringSet.removeAll(stringSetSecond));
-        Assert.assertTrue(stringSet.size() == 4);
+        assertTrue(stringSet.size() == 8);
+        assertTrue(stringSet.removeAll(stringSetSecond));
+        assertTrue(stringSet.size() == 4);
     }
 
     @Test
@@ -139,7 +141,7 @@ public class HashSetTest {
             stringSetTarget.add(itr.next());
         }
 
-        Assert.assertTrue(stringSet.equals(stringSetTarget));
+        assertTrue(stringSet.equals(stringSetTarget));
     }
 
     @Test
@@ -151,14 +153,14 @@ public class HashSetTest {
         stringSetSecond.add("element5");
         stringSet.retainAll(stringSetSecond);
 
-        Assert.assertTrue(stringSet.size()==3);//중복되는 요소는 3개
+        assertTrue(stringSet.size()==3);//중복되는 요소는 3개
 
         Set<String> tempSet = new HashSet();
         tempSet.add("element2");//duplicate
         tempSet.add("element3");
         tempSet.add("element4");
 
-        Assert.assertEquals(stringSet, tempSet);
+        assertEquals(stringSet, tempSet);
 
     }
 

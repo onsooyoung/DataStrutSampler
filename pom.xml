@@ -3,20 +3,38 @@
   					http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>heisenbug.datastruts</groupId>
-    <artifactId>dsampler</artifactId>
+    <groupId>com.heisenbug</groupId>
+    <artifactId>data-structure-sampler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Data Struts Sampler</name>
+    <name>Data structure Sampler</name>
     <description>데이터구조 샘플</description>
     <packaging>jar</packaging>
 
     <dependencies>
+        <!--
+            JUnit5를 사용하고자 하나 IntelliJ IDEA (2016.2.5)버전에서 정상호환이 안되는 이슈
+            Maven으로 대체하여 사용 하자
+        -->
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.0.0-M4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.0.0-M4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+
 
     </dependencies>
 

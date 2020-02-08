@@ -1,47 +1,46 @@
 package map.hashtable;
 
-import dto.Friend;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
-
-import java.util.ArrayList;
+import dto.HarryFriend;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import java.util.Hashtable;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Created by PC000411 on 2019-02-07.
  */
 public class HashTableTest {
 
-    Hashtable<Integer, Friend> friendTable = new Hashtable<Integer, Friend>();
+    Hashtable<Integer, HarryFriend> HarryFriendTable = new Hashtable<Integer, HarryFriend>();
 
-    @Before
+    @BeforeAll
     public void setupData(){
 
-        friendTable.put(0, new Friend(1, "Harry"));
-        friendTable.put(1, new Friend(2, "Ron"));
-        friendTable.put(2, new Friend(5, "Dumbledore"));
-        /*friendTable.put(3, new Friend(3, "Hermione"));
-        friendTable.put(4, new Friend(4, "Severus"));//magic copy
-        friendTable.put(5, new Friend(4, "Severus"));
-        friendTable.put(6, new Friend(4, "Severus"));
-        friendTable.put(7, new Friend(4, "Severus"));
-        friendTable.put(8, new Friend(4, "Severus"));*/
+        HarryFriendTable.put(0, new HarryFriend(1, "Harry"));
+        HarryFriendTable.put(1, new HarryFriend(2, "Ron"));
+        HarryFriendTable.put(2, new HarryFriend(5, "Dumbledore"));
+        /*HarryFriendTable.put(3, new HarryFriend(3, "Hermione"));
+        HarryFriendTable.put(4, new HarryFriend(4, "Severus"));//magic copy
+        HarryFriendTable.put(5, new HarryFriend(4, "Severus"));
+        HarryFriendTable.put(6, new HarryFriend(4, "Severus"));
+        HarryFriendTable.put(7, new HarryFriend(4, "Severus"));
+        HarryFriendTable.put(8, new HarryFriend(4, "Severus"));*/
     }
 
     @Test
     public void checkKey(){
-        Assert.assertTrue(friendTable.containsKey(0));
+        assertTrue(HarryFriendTable.containsKey(0));
     }
 
     @Test
     public void check(){
 
-        Hashtable<Integer, Friend> fakeFriendTable = new Hashtable<Integer, Friend>();
-        fakeFriendTable.put(0, new Friend(1, "Harry"));
-        fakeFriendTable.put(1, new Friend(2, "Ron"));
-        fakeFriendTable.put(2, new Friend(5, "Dumbledore"));
-        Assert.assertTrue(friendTable.contains(new Friend(1, "Harry")));
+        Hashtable<Integer, HarryFriend> fakeHarryFriendTable = new Hashtable<Integer, HarryFriend>();
+        fakeHarryFriendTable.put(0, new HarryFriend(1, "Harry"));
+        fakeHarryFriendTable.put(1, new HarryFriend(2, "Ron"));
+        fakeHarryFriendTable.put(2, new HarryFriend(5, "Dumbledore"));
+        assertTrue(HarryFriendTable.contains(new HarryFriend(1, "Harry")));
         //
     }
 

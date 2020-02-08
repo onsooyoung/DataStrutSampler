@@ -47,6 +47,7 @@ buildNumber.properties
 .idea/**/tasks.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/*
 
 # Sensitive or high-churn files
 .idea/**/dataSources/
@@ -73,6 +74,7 @@ cmake-build-release/
 
 # IntelliJ
 out/
+dsampler.iml
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
