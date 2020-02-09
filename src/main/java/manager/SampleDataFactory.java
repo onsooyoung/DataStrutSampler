@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -53,31 +54,56 @@ public class SampleDataFactory {
         return new Date(ThreadLocalRandom.current().nextInt() * 1000L);
     }
 
+
+    public List<Friend> getFriendListForOld(){
+
+        List<Friend> friends = new ArrayList<>();
+        for(String name: names){
+            friends.add(new Friend(name));
+        }
+
+        return friends;
+    }
+
+
     public List<Friend> getFriendListForLambda(){
         return  Arrays.stream(names).map(n-> new Friend(n)).collect(Collectors.toList());
     }
 
-    public Map<String, Product> getProductMap(int cnt){
+    public Map<String, Product> getProductMapOld(int cnt) {
 
-        Map<String, Product> productMap = new HashMap<>();
-        for(int i=0;i< cnt;i++){
+        Map < String, Product > productMap = new HashMap<>();
+         for (int i = 0; i < cnt; i++) {
             Product product = new Product();
             productMap.put(product.getProductId(), product);
-        }
 
+        }
         return productMap;
     }
 
-    public List<Order> getOrderList(int orderCnt , int orderByProductCnt){
+    public Map<String, Product> getProductMapForLambda(int cnt){
+
+        return Stream.of(new Product()).limit(cnt).collect(
+                Collectors.toMap(Product::getProductId, Function.identity()));
+    }
+
+
+    public List<Order> getOrderListOld(int orderCnt , int orderByProductCnt){
 
         List<Order> order = new ArrayList<>();
         for(int i=0;i< orderCnt;i++){
             order.add(new Order(  String.format("O%05d", new Random().nextInt(orderCnt))
                                 , getRandomTimestamp().toString()
-                                , getProductMap(orderByProductCnt)));
+                                , getProductMapForLambda(orderByProductCnt)));
         }
-
         return order;
+    }
+
+    public List<Order> getOrderListForLambda(int orderCnt , int orderByProductCnt){
+        return Stream.of(new Order(String.format("O%05d", new Random().nextInt(orderCnt))
+                , getRandomTimestamp().toString()
+                , getProductMapForLambda(orderByProductCnt))).limit(orderCnt).collect(Collectors.toList());
+
 
     }
 
