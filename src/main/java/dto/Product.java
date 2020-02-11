@@ -17,13 +17,11 @@ public class Product {
     private String productName;
     private long price;
 
-    private final static String[] productCategoryCode = {"A", "B", "C" , "X", "Y", "Z" , "R"};
 
-    public Product() {
-        this.productId = String.format(productCategoryCode[new Random().nextInt(productCategoryCode.length)]+"%5d",UUID.randomUUID().toString());
-        this.productName = UUID.randomUUID().toString().substring(0,5);
-        this.price = new Random().nextLong();
 
+    public Product(String productId, String productName, long price) {
+        this.productId = productId;
+        this.productName = productName;
+        this.price = price;
     }
-
 }

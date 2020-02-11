@@ -24,7 +24,4 @@ public class Friend{
         return new Random().nextInt(15);
     }
 
-
-
-
 }

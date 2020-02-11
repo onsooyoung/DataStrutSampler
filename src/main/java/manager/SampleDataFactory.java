@@ -11,6 +11,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -55,6 +56,12 @@ public class SampleDataFactory {
     }
 
 
+    public List<String> getFriendsNameList(){
+
+        return Arrays.asList(names);
+    }
+
+
     public List<Friend> getFriendListForOld(){
 
         List<Friend> friends = new ArrayList<>();
@@ -70,11 +77,25 @@ public class SampleDataFactory {
         return  Arrays.stream(names).map(n-> new Friend(n)).collect(Collectors.toList());
     }
 
+    public final static String[] productCategoryCode = {"A", "B", "C" , "X", "Y", "Z" , "R"};
+    public final static long[] productPrice = {1000, 1300, 2000, 5000,1000,1200, 10000};
+    public final static String[] productName = {"IPAD", "IPHONE", "MACBOOK"};
+
+
+    enum productName{
+        IPAD, IPHONE, MACBOOK
+    }
+
+
     public Map<String, Product> getProductMapOld(int cnt) {
 
         Map < String, Product > productMap = new HashMap<>();
          for (int i = 0; i < cnt; i++) {
-            Product product = new Product();
+            Product product = new Product(
+                      productCategoryCode[new Random().nextInt(productCategoryCode.length-1)]
+                    , productName[new Random().nextInt(productName.length-1)]
+                    , productPrice[productPrice.length-1]
+            );
             productMap.put(product.getProductId(), product);
 
         }
@@ -83,10 +104,14 @@ public class SampleDataFactory {
 
     public Map<String, Product> getProductMapForLambda(int cnt){
 
-        return Stream.of(new Product()).limit(cnt).collect(
-                Collectors.toMap(Product::getProductId, Function.identity()));
+        return IntStream.range(0,cnt).mapToObj(i->{
+            return new Product(
+                     productCategoryCode[new Random().nextInt(productCategoryCode.length-1)]
+                            + String.format("%05d", i)
+                    , productName[new Random().nextInt(productName.length-1)]
+                    , productPrice[productPrice.length-1]);
+        }).collect(Collectors.toMap(Product::getProductId, Function.identity()));
     }
-
 
     public List<Order> getOrderListOld(int orderCnt , int orderByProductCnt){
 
@@ -100,11 +125,14 @@ public class SampleDataFactory {
     }
 
     public List<Order> getOrderListForLambda(int orderCnt , int orderByProductCnt){
-        return Stream.of(new Order(String.format("O%05d", new Random().nextInt(orderCnt))
-                , getRandomTimestamp().toString()
-                , getProductMapForLambda(orderByProductCnt))).limit(orderCnt).collect(Collectors.toList());
 
-
+        return IntStream.range(0, orderCnt).mapToObj(i->
+                {
+                    return new Order(String.format("O%05d", i)
+                            , getRandomTimestamp().toString()
+                            , getProductMapForLambda(orderByProductCnt));
+                }
+        ).collect(Collectors.toList());
     }
 
 
