@@ -21,6 +21,14 @@ public class SampleDataFactory {
 
     private static SampleDataFactory sampleDataFactory;
 
+    public final static String[] productCategoryCode = {"A", "B", "C" , "X", "Y", "Z" , "R"};
+    public final static long[] productPrice = {1000, 1300, 2000, 5000,1000,1200, 10000};
+    public final static String[] productName = {"IPAD", "IPHONE", "MACBOOK"};
+
+     enum productName{
+        IPAD, IPHONE, MACBOOK
+    }
+
     public static synchronized SampleDataFactory getInstance(){
 
         if(sampleDataFactory == null){
@@ -51,6 +59,7 @@ public class SampleDataFactory {
                             , "Queenie"
                             , "Jacob" };
 
+
     public final static Date getRandomTimestamp() {
         return new Date(ThreadLocalRandom.current().nextInt() * 1000L);
     }
@@ -72,18 +81,8 @@ public class SampleDataFactory {
         return friends;
     }
 
-
     public List<Friend> getFriendListForLambda(){
         return  Arrays.stream(names).map(n-> new Friend(n)).collect(Collectors.toList());
-    }
-
-    public final static String[] productCategoryCode = {"A", "B", "C" , "X", "Y", "Z" , "R"};
-    public final static long[] productPrice = {1000, 1300, 2000, 5000,1000,1200, 10000};
-    public final static String[] productName = {"IPAD", "IPHONE", "MACBOOK"};
-
-
-    enum productName{
-        IPAD, IPHONE, MACBOOK
     }
 
 
@@ -102,7 +101,7 @@ public class SampleDataFactory {
         return productMap;
     }
 
-    public Map<String, Product> getProductMapForLambda(int cnt){
+    public static Map<String, Product> getProductMapForLambda(int cnt){
 
         return IntStream.range(0,cnt).mapToObj(i->{
             return new Product(
